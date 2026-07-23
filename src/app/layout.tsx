@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { Alegreya_Sans } from "next/font/google";
+import { Merriweather } from "next/font/google";
 import "./globals.css";
 
-const alegreyaSansHeading = Alegreya_Sans({
+const merriweatherHeading = Merriweather({
   subsets: ["latin"],
   display: "swap",
-  weight: ["500", "700"],
+  weight: "900",
   variable: "--font-heading",
 });
 
-const alegreyaSansBody = Alegreya_Sans({
+const merriweatherBody = Merriweather({
   subsets: ["latin"],
   display: "swap",
-  weight: "400",
+  weight: "300",
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "Dra. Kátia Caetano | Psicóloga Clínica",
+  title: "Dr. Carlos Antônio Moura",
   description:
-    "Links úteis de Dra. Kátia Caetano — Psicóloga Clínica especializada em Terapia Cognitivo-Comportamental (TCC). Supervisões, comunidade e mais.",
+    "Links úteis do Dr. Carlos Antônio Moura — CORC, blog, consultas, YouTube e Spotify.",
   icons: {
     icon: "/logo.svg",
     apple: "/logo.svg",
@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-BR"
-      className={`${alegreyaSansHeading.variable} ${alegreyaSansBody.variable}`}
+      className={`${merriweatherHeading.variable} ${merriweatherBody.variable}`}
     >
       <body className="font-body antialiased">{children}</body>
     </html>

@@ -1,12 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --cream: #F5EFE2;
-  --card-bg: #13181E;
-  --gold: #C4940C;
-  --gold-hover: #B08309;
-  --green: #008538;
-  --white: #FFFFFF;
+  --block-bg: #151314;
+  --accent: #E59F14;
+  --accent-hover: #C98A0F;
+  --text-secondary: #FFFFFF;
 }
 
 @theme inline {
@@ -15,9 +13,9 @@
 }
 
 body {
-  background: var(--cream);
-  color: #1A1A1A;
-  font-family: var(--font-body), sans-serif;
+  background: var(--block-bg);
+  color: var(--text-secondary);
+  font-family: var(--font-body), serif;
   min-height: 100dvh;
 }
 
@@ -29,14 +27,14 @@ html {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--cream);
+  background: var(--block-bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: #C4C0B8;
+  background: var(--accent);
   border-radius: 99px;
 }
 
 ::selection {
-  background: var(--green);
-  color: #FFFFFF;
+  background: var(--accent);
+  color: #151314;
 }
