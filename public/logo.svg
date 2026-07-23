@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="bg" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#00692c"/>
+      <stop offset="35%" stop-color="#008538"/>
+      <stop offset="55%" stop-color="#17b862"/>
+      <stop offset="75%" stop-color="#008538"/>
+      <stop offset="100%" stop-color="#00522a"/>
+    </linearGradient>
+    <radialGradient id="sheen" cx="50%" cy="18%" r="70%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="letter" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FFC800"/>
+    </linearGradient>
+  </defs>
+  <circle cx="50" cy="50" r="48" fill="url(#bg)"/>
+  <circle cx="50" cy="50" r="48" fill="url(#sheen)"/>
+  <circle cx="50" cy="50" r="46.5" fill="none" stroke="#000000" stroke-opacity="0.15" stroke-width="1"/>
+  <text x="50" y="54" font-family="Georgia, 'Times New Roman', serif" font-size="58" font-weight="700" fill="url(#letter)" text-anchor="middle" dominant-baseline="central">&#936;</text>
+</svg>
+

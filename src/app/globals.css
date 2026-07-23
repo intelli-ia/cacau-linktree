@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #F5EFE2;
+  --card-bg: #13181E;
+  --gold: #C4940C;
+  --gold-hover: #B08309;
+  --green: #008538;
+  --white: #FFFFFF;
+}
+
+@theme inline {
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+body {
+  background: var(--cream);
+  color: #1A1A1A;
+  font-family: var(--font-body), sans-serif;
+  min-height: 100dvh;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: #C4C0B8;
+  border-radius: 99px;
+}
+
+::selection {
+  background: var(--green);
+  color: #FFFFFF;
+}
