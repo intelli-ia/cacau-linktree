@@ -21,8 +21,8 @@ export const metadata: Metadata = {
   description:
     "Links úteis do Dr. Carlos Antônio Moura — CORC, blog, consultas, YouTube e Spotify.",
   icons: {
-    icon: "/logo.svg",
-    apple: "/logo.svg",
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
   },
 };
 
