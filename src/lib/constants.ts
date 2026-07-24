@@ -14,8 +14,8 @@ export const IMAGE_BLOCKS = [
     h1: "Leia o meu BLOG",
     cta: "Conhecer",
     href: "https://raciocinioclinico.org/",
-    imageLabel: "Mockup do blog no celular",
-    image: "/blog-mockup.webp",
+    imageLabel: "Mockup do canal no Youtube",
+    image: "/youtube-mockup.webp",
   },
   {
     id: "consultas",
@@ -31,8 +31,8 @@ export const IMAGE_BLOCKS = [
     h1: "Conheça meu canal no Youtube",
     cta: "Acessar",
     href: "https://www.youtube.com/@carlosaggmoura",
-    imageLabel: "Mockup do canal no Youtube",
-    image: "/youtube-mockup.webp",
+    imageLabel: "Mockup do blog no celular",
+    image: "/blog-mockup.webp",
   },
   {
     id: "spotify",

@@ -82,18 +82,15 @@ export default function LinktreePage() {
             >
               {/* Image */}
               {hasImage && isFullBleed && (
-                <>
-                  <div className="absolute inset-0">
-                    <Image
-                      src={versionedSrc(block.image)}
-                      alt={block.h1}
-                      fill
-                      className="object-cover object-top scale-110 -translate-y-[5%]"
-                      sizes="(max-width: 448px) 100vw, 576px"
-                    />
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#151314] via-[#151314]/70 to-transparent" />
-                </>
+                <div className="absolute inset-0">
+                  <Image
+                    src={versionedSrc(block.image)}
+                    alt={block.h1}
+                    fill
+                    className="object-cover object-[center_15%]"
+                    sizes="(max-width: 448px) 100vw, 576px"
+                  />
+                </div>
               )}
 
               {hasImage && !isFullBleed && (
@@ -129,7 +126,7 @@ export default function LinktreePage() {
                 <h2 className="font-heading text-white text-[1.1rem] sm:text-[1.9rem] leading-tight whitespace-pre-line">
                   {block.h1}
                 </h2>
-                <span className="block w-full text-center bg-[#E59F14] group-hover:bg-[#C98A0F] transition-colors duration-200 text-white font-heading text-sm sm:text-lg rounded-lg px-6 py-2.5 sm:py-3 tracking-wide">
+                <span className="block w-full text-center bg-gradient-to-b from-[#F0B23A] to-[#E08F0A] border border-[#FCD48A]/50 shadow-[0_4px_20px_rgba(229,159,20,0.25),inset_0_1px_0_rgba(255,255,255,0.35)] group-hover:shadow-[0_8px_30px_rgba(229,159,20,0.4),inset_0_1px_0_rgba(255,255,255,0.35)] group-hover:brightness-105 transition-all duration-200 text-[#151314] font-heading font-semibold text-xs sm:text-lg rounded-lg px-4 py-2 sm:px-6 sm:py-3 tracking-wide">
                   {block.cta}
                 </span>
               </div>
@@ -146,9 +143,9 @@ export default function LinktreePage() {
             href={block.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center text-center rounded-2xl bg-[#151314] hover:bg-[#1F1B19] transition-colors duration-200 shadow-[0_4px_20px_rgba(0,0,0,0.3)] px-6 py-5"
+            className="relative flex items-center justify-center text-center rounded-2xl bg-gradient-to-b from-[#F0B23A] to-[#E08F0A] border border-[#FCD48A]/50 shadow-[0_4px_20px_rgba(229,159,20,0.25),inset_0_1px_0_rgba(255,255,255,0.35)] hover:shadow-[0_8px_30px_rgba(229,159,20,0.4),inset_0_1px_0_rgba(255,255,255,0.35)] hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:brightness-95 transition-all duration-200 px-6 py-5"
           >
-            <span className="font-heading text-[#E59F14] text-base sm:text-xl tracking-wide">
+            <span className="font-heading text-[#151314] text-base sm:text-xl font-semibold tracking-wide">
               {block.cta}
             </span>
           </a>
