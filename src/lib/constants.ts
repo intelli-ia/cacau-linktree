@@ -38,9 +38,8 @@ export const IMAGE_BLOCKS = [
     id: "spotify",
     h1: "Aulas do CORC no Spotify",
     cta: "Ouça Gratuitamente",
-    href: "#",
+    href: "https://open.spotify.com/show/1jANTRK861FcRMMA9yTlCU?si=SrVOZasKROylzx3e-Dos4A&utm_source=copy-link",
     imageLabel: "Mockup do Spotify",
-    pending: true,
   },
 ] as const;
 
