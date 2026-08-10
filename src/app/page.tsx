@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import Image from "next/image";
 import {
-  GraduationCap,
+  ArrowRight,
   Smartphone,
   User,
   PlaySquare,
@@ -11,12 +11,12 @@ import {
 } from "lucide-react";
 import {
   PROFESSIONAL_NAME,
+  HERO_BLOCK,
   IMAGE_BLOCKS,
   BUTTON_BLOCKS,
 } from "@/lib/constants";
 
 const PLACEHOLDER_ICONS: Record<string, LucideIcon> = {
-  corc: GraduationCap,
   blog: Smartphone,
   consultas: User,
   youtube: PlaySquare,
@@ -32,7 +32,6 @@ function SpotifyLogo({ className }: { className?: string }) {
 }
 
 const IMAGE_STYLES: Record<string, string> = {
-  corc: "object-cover translate-x-[15%]",
   blog: "object-contain scale-125 translate-y-[20%]",
   youtube: "object-contain scale-125 translate-y-[20%]",
 };
@@ -46,19 +45,120 @@ function versionedSrc(src: string): string {
   }
 }
 
+/**
+ * Borda dos cards: moldura dourada em degradê (ver `.gold-frame`),
+ * um fio de luz âmbar no topo e uma linha interna escura que afasta o ouro do
+ * conteúdo — o respiro é o que separa "moldura" de "contorno".
+ */
+function GoldFrame({ radius }: { radius: string }) {
+  return (
+    <>
+      <div
+        aria-hidden
+        className="gold-frame opacity-85 transition-opacity duration-300 group-hover:opacity-100"
+      />
+      <div
+        aria-hidden
+        className={`pointer-events-none absolute inset-px ${radius} ring-1 ring-inset ring-black/40`}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-10 top-0 h-px bg-[linear-gradient(to_right,transparent,rgba(255,226,160,0.6),transparent)]"
+      />
+    </>
+  );
+}
+
+/**
+ * Bloco principal. Composto em camadas, de trás para a frente:
+ * base em degradê → mosaico de aulas (com máscara) → véu → brilho dourado →
+ * reflexo que atravessa no hover → conteúdo.
+ */
+function HeroCard() {
+  return (
+    <a
+      href={HERO_BLOCK.href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative isolate block overflow-hidden rounded-[26px] bg-[#171415] shadow-[0_1px_2px_rgba(0,0,0,0.7),0_28px_64px_-28px_rgba(0,0,0,0.95),0_12px_40px_-18px_rgba(229,159,20,0.24)] transition-[transform,box-shadow] duration-500 ease-out motion-safe:hover:-translate-y-1 hover:shadow-[0_1px_2px_rgba(0,0,0,0.7),0_38px_84px_-30px_rgba(0,0,0,1),0_20px_54px_-18px_rgba(229,159,20,0.45)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0B23A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B090A]"
+    >
+      {/* Base */}
+      <div className="absolute inset-0 -z-30 bg-[linear-gradient(140deg,#2B2219_0%,#1C1718_44%,#141112_100%)]" />
+
+      {/* Mosaico de aulas, dissolvendo para a esquerda */}
+      <div className="absolute inset-y-0 right-0 -z-20 w-[78%] sm:w-[64%] [mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.25)_26%,#000_66%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,rgba(0,0,0,0.25)_26%,#000_66%)]">
+        <Image
+          src={versionedSrc(HERO_BLOCK.image)}
+          alt={HERO_BLOCK.imageLabel}
+          fill
+          sizes="(max-width: 640px) 78vw, 400px"
+          loading="eager"
+          fetchPriority="high"
+          className="translate-x-[21%] scale-110 object-cover object-[50%_18%] opacity-60 [filter:saturate(0.85)_contrast(1.05)] transition-transform duration-[900ms] ease-out motion-safe:group-hover:scale-[1.16]"
+        />
+      </div>
+
+      {/* Véu horizontal + vinheta inferior: garantem contraste do texto */}
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#171415_14%,rgba(23,20,21,0.96)_52%,rgba(23,20,21,0.55)_80%,rgba(23,20,21,0.15)_100%)] sm:bg-[linear-gradient(to_right,#171415_8%,rgba(23,20,21,0.94)_40%,rgba(23,20,21,0.3)_74%,transparent_100%)]" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_top,rgba(11,9,10,0.8)_0%,transparent_42%)]" />
+
+      {/* Brilho dourado */}
+      <div className="pointer-events-none absolute -right-20 -top-24 -z-10 h-72 w-72 rounded-full bg-[#E59F14]/25 blur-[80px] transition-opacity duration-500 group-hover:opacity-100 sm:opacity-80" />
+
+      {/* Reflexo que atravessa o card no hover */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-y-0 -left-1/4 w-1/4 -skew-x-12 bg-[linear-gradient(to_right,transparent,rgba(255,255,255,0.08),transparent)] transition-transform duration-[1100ms] ease-out motion-safe:group-hover:translate-x-[560%]" />
+      </div>
+
+      {/* Conteúdo */}
+      <div className="relative flex min-h-[300px] max-w-[90%] flex-col justify-center gap-4 px-7 py-10 sm:min-h-[364px] sm:max-w-[64%] sm:gap-5 sm:px-11 sm:py-12">
+        <div className="flex items-center gap-3">
+          <span className="h-px w-7 bg-[linear-gradient(to_right,#F0B23A,rgba(240,178,58,0))]" />
+          <span className="font-heading text-[10px] uppercase tracking-[0.26em] text-[#E9BE6A] sm:text-[11px]">
+            {HERO_BLOCK.eyebrow}
+          </span>
+        </div>
+
+        <div>
+          <p className="font-body text-sm tracking-[0.08em] text-white/50 sm:text-base">
+            {HERO_BLOCK.lead}
+          </p>
+          <h2 className="mt-1 font-heading text-[1.75rem] leading-[1.05] tracking-[-0.015em] whitespace-pre-line text-white [text-shadow:0_2px_24px_rgba(0,0,0,0.6)] sm:text-[2.7rem]">
+            {HERO_BLOCK.h1}
+          </h2>
+        </div>
+
+        <p className="max-w-[30ch] font-body text-[0.8rem] leading-relaxed text-white/55 sm:text-[0.95rem]">
+          {HERO_BLOCK.subtitle}
+        </p>
+
+        <span className="mt-1 inline-flex w-fit items-center gap-2.5 rounded-full bg-[linear-gradient(180deg,#F8CB68_0%,#EFAE33_46%,#DD8B05_100%)] px-6 py-3 font-heading text-sm font-semibold tracking-wide text-[#1A1207] ring-1 ring-[#FFD98F]/40 shadow-[0_12px_30px_-10px_rgba(229,159,20,0.7),inset_0_1px_0_rgba(255,255,255,0.55)] transition-[transform,box-shadow,filter] duration-300 ease-out group-hover:brightness-[1.04] group-hover:shadow-[0_18px_42px_-12px_rgba(229,159,20,0.85),inset_0_1px_0_rgba(255,255,255,0.6)] motion-safe:group-hover:-translate-y-0.5 sm:px-7 sm:py-3.5 sm:text-base">
+          {HERO_BLOCK.cta}
+          <ArrowRight
+            aria-hidden
+            className="h-4 w-4 transition-transform duration-300 ease-out motion-safe:group-hover:translate-x-1"
+          />
+        </span>
+      </div>
+
+      <GoldFrame radius="rounded-[25px]" />
+    </a>
+  );
+}
+
 export default function LinktreePage() {
   return (
     <main className="min-h-dvh flex flex-col items-center px-4 pt-10 pb-10">
       {/* Profile */}
       <section className="flex flex-col items-center gap-2 mb-8">
-        <div className="relative w-24 h-24 rounded-full overflow-hidden ring-[3px] ring-[#E59F14] ring-offset-[3px] ring-offset-[#151314]">
+        <div className="relative w-24 h-24 rounded-full overflow-hidden ring-[3px] ring-[#E59F14] ring-offset-[3px] ring-offset-[#0B090A] shadow-[0_10px_30px_-10px_rgba(229,159,20,0.45)]">
           <Image
             src={versionedSrc("/profile-avatar.webp")}
             alt={PROFESSIONAL_NAME}
             fill
             className="object-cover"
             sizes="96px"
-            priority
+            loading="eager"
           />
         </div>
         <h1 className="font-heading text-3xl text-white tracking-wide text-center">
@@ -68,6 +168,8 @@ export default function LinktreePage() {
 
       {/* Image + text blocks */}
       <section className="w-full max-w-xl flex flex-col gap-4">
+        <HeroCard />
+
         {IMAGE_BLOCKS.map((block) => {
           const Icon = PLACEHOLDER_ICONS[block.id];
           const hasImage = "image" in block && !!block.image;
@@ -78,7 +180,7 @@ export default function LinktreePage() {
               href={block.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group relative flex items-center rounded-2xl overflow-hidden bg-[#151314] min-h-[160px] sm:min-h-[240px] shadow-[0_4px_20px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(0,0,0,0.45)] transition-all duration-200"
+              className="group relative flex items-center overflow-hidden rounded-[22px] bg-[linear-gradient(180deg,#1E1A1B_0%,#171415_62%)] min-h-[160px] sm:min-h-[240px] shadow-[0_1px_2px_rgba(0,0,0,0.7),0_20px_44px_-26px_rgba(0,0,0,0.95),0_10px_34px_-18px_rgba(229,159,20,0.2)] transition-[transform,box-shadow] duration-300 ease-out hover:shadow-[0_1px_2px_rgba(0,0,0,0.7),0_28px_58px_-26px_rgba(0,0,0,1),0_16px_46px_-18px_rgba(229,159,20,0.4)] motion-safe:hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F0B23A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B090A]"
             >
               {/* Image */}
               {hasImage && isFullBleed && (
@@ -126,10 +228,12 @@ export default function LinktreePage() {
                 <h2 className="font-heading text-white text-[1.1rem] sm:text-[1.9rem] leading-tight whitespace-pre-line">
                   {block.h1}
                 </h2>
-                <span className="block w-full text-center bg-gradient-to-b from-[#F0B23A] to-[#E08F0A] border border-[#FCD48A]/50 shadow-[0_4px_20px_rgba(229,159,20,0.25),inset_0_1px_0_rgba(255,255,255,0.35)] group-hover:shadow-[0_8px_30px_rgba(229,159,20,0.4),inset_0_1px_0_rgba(255,255,255,0.35)] group-hover:brightness-105 transition-all duration-200 text-[#151314] font-heading font-semibold text-xs sm:text-lg rounded-lg px-4 py-2 sm:px-6 sm:py-3 tracking-wide">
+                <span className="block w-full text-center bg-[linear-gradient(180deg,#F8CB68_0%,#EFAE33_46%,#DD8B05_100%)] ring-1 ring-[#FFD98F]/45 shadow-[0_1px_2px_rgba(0,0,0,0.45),0_10px_26px_-12px_rgba(229,159,20,0.6),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(122,76,0,0.3)] group-hover:shadow-[0_1px_2px_rgba(0,0,0,0.45),0_16px_36px_-14px_rgba(229,159,20,0.8),inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(122,76,0,0.3)] group-hover:brightness-[1.04] transition-[box-shadow,filter] duration-300 ease-out text-[#1A1207] font-heading font-semibold text-xs sm:text-lg rounded-lg px-4 py-2 sm:px-6 sm:py-3 tracking-wide">
                   {block.cta}
                 </span>
               </div>
+
+              <GoldFrame radius="rounded-[21px]" />
             </a>
           );
         })}
@@ -143,9 +247,9 @@ export default function LinktreePage() {
             href={block.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative flex items-center justify-center text-center rounded-2xl bg-gradient-to-b from-[#F0B23A] to-[#E08F0A] border border-[#FCD48A]/50 shadow-[0_4px_20px_rgba(229,159,20,0.25),inset_0_1px_0_rgba(255,255,255,0.35)] hover:shadow-[0_8px_30px_rgba(229,159,20,0.4),inset_0_1px_0_rgba(255,255,255,0.35)] hover:-translate-y-0.5 hover:brightness-105 active:translate-y-0 active:brightness-95 transition-all duration-200 px-6 py-5"
+            className="relative flex items-center justify-center text-center rounded-[22px] bg-[linear-gradient(180deg,#F8CB68_0%,#EFAE33_46%,#DD8B05_100%)] ring-1 ring-[#FFD98F]/45 shadow-[0_1px_2px_rgba(0,0,0,0.6),0_16px_38px_-18px_rgba(229,159,20,0.55),inset_0_1px_0_rgba(255,255,255,0.5),inset_0_-1px_0_rgba(122,76,0,0.32)] hover:shadow-[0_1px_2px_rgba(0,0,0,0.6),0_24px_52px_-20px_rgba(229,159,20,0.8),inset_0_1px_0_rgba(255,255,255,0.55),inset_0_-1px_0_rgba(122,76,0,0.32)] hover:brightness-[1.04] active:translate-y-0 active:brightness-95 transition-[transform,box-shadow,filter] duration-300 ease-out motion-safe:hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FFE0A3] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B090A] px-6 py-5"
           >
-            <span className="font-heading text-[#151314] text-base sm:text-xl font-semibold tracking-wide">
+            <span className="font-heading text-[#1A1207] text-base sm:text-xl font-semibold tracking-wide">
               {block.cta}
             </span>
           </a>

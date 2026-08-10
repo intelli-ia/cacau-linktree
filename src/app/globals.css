@@ -1,7 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --block-bg: #151314;
+  /* Chão da página: mais escuro que os cards, para que eles pareçam elevados. */
+  --page-bg: #0B090A;
+  /* Superfície dos cards. */
+  --block-bg: #171415;
   --accent: #E59F14;
   --accent-hover: #C98A0F;
   --text-secondary: #FFFFFF;
@@ -13,7 +16,14 @@
 }
 
 body {
-  background: var(--block-bg);
+  background-color: var(--page-bg);
+  /* Leve calor no topo: dá profundidade sem competir com os cards. */
+  background-image: radial-gradient(
+    130% 60% at 50% 0%,
+    #16110F 0%,
+    transparent 62%
+  );
+  background-attachment: fixed;
   color: var(--text-secondary);
   font-family: var(--font-body), serif;
   min-height: 100dvh;
@@ -23,11 +33,42 @@ html {
   scroll-behavior: smooth;
 }
 
+/*
+ * Moldura dourada de 1px dos cards secundários.
+ *
+ * O degradê é direcional — acesa no topo-esquerda, apagando no meio, com uma
+ * reacendida discreta embaixo — para o fio ler como metal sob luz, e não como
+ * um contorno chapado. As duas máscaras compostas recortam apenas a faixa da
+ * borda, deixando o miolo livre (funciona por cima de imagem full-bleed).
+ */
+.gold-frame {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 226, 160, 0.88) 0%,
+    rgba(229, 159, 20, 0.62) 24%,
+    rgba(229, 159, 20, 0.14) 55%,
+    rgba(240, 178, 58, 0.5) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--block-bg);
+  background: var(--page-bg);
 }
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
