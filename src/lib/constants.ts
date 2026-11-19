@@ -1,20 +1,22 @@
 export const PROFESSIONAL_NAME = "Dr. Carlos Antônio Moura";
 
-/** Bloco principal — recebe tratamento visual próprio (hero). */
-export const HERO_BLOCK = {
-  id: "corc",
-  eyebrow: "Curso online",
-  lead: "CORC —",
-  h1: "Raciocínio\nClínico",
-  subtitle:
-    "Aulas em vídeo para desenvolver, na prática, o raciocínio que leva do sintoma ao diagnóstico.",
-  cta: "Faça parte",
-  href: "https://curso.raciocinioclinico.org/",
-  imageLabel: "Capa de aula",
-  image: "/corc-cover.webp",
-} as const;
-
 export const IMAGE_BLOCKS = [
+  {
+    id: "corc",
+    h1: "Curso online de raciocínio clínico",
+    cta: "Faça parte",
+    href: "https://curso.raciocinioclinico.org/",
+    imageLabel: "Capa de aula",
+    image: "/corc-cover.webp",
+  },
+  {
+    id: "cgs",
+    h1: "Curso grandes síndromes",
+    cta: "Faça parte",
+    href: "https://cgs.raciocinioclinico.org/?utm_source=instagram&utm_medium=organic_social&utm_campaign=bio",
+    imageLabel: "Capa do curso Grandes Síndromes",
+    image: "/cgs-cover.webp",
+  },
   {
     id: "blog",
     h1: "Leia o meu BLOG",
